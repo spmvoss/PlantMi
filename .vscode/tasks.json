@@ -10,7 +10,7 @@
             "args": [
                 "Arduino.cpp",
                 "Sensors.cpp",
-                "tests/main_test.cpp"
+                "tests/testLDR.cpp"
             ],
             "options": {
                 "cwd": "${workspaceRoot}/PlantMi"
