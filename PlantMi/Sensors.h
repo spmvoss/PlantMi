@@ -46,4 +46,16 @@ class Thermistor : public Sensor {
         float measure();
 };
 
+class LightSensor : public Sensor {
+  private:
+    float _LUX;
+    float _slope; // Slope of the log10(lux)/log10(R)
+    float _offset; // Offset of log10(lux)/log10(R)
+    float _ldrR; // Resistance of the LDR
+    float _dividerR;
+  public:
+    void configure(float slope, float offset, float dividerR, float voltage);
+    float measure();
+};
+
 #endif
