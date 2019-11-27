@@ -11,10 +11,13 @@
 // Generic sensor class forms the base of all sensors
 class Sensor{
   protected: 
+      int _numOfDecoderBits;
+      float _numOfDecoderSteps;
       int _pinNumber; // Which pin to measure
       int _readValue; // To store the reading
   public:
     Sensor();
+    Sensor(int bits);
     void setPin(int pinNumber); // Setting the pin
 };
 
@@ -27,6 +30,20 @@ class SoilMoistureSensor : public Sensor {
   public:
     void configure(int lowValue, int highValue);
     int measure();
+};
+
+class Thermistor : public Sensor {
+    private:
+        int _resistor;
+        float _T0; // Temperature (K) at which R0 is measured
+        float _B; // Sensor's beta value
+        float _R0; // Resistance at T0
+        float _voltageSupplied; // Working voltage
+        float _voltageMeasured;
+        float _temperature;
+    public:
+        void configure(float T0, float B, float R0);
+        float measure();
 };
 
 #endif

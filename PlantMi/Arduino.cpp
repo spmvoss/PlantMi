@@ -11,5 +11,12 @@ void pinMode(int pin, bool mode){
 }
 
 int analogRead(int pin){
-    return 12*pin; // Just an arbritraty return value 
+    switch(pin){
+        case 10 : return 100;
+        case 11 : return 300;
+        case 12 : return 600;
+        case 13 : return 900;
+        case 14 : return 1010;
+        default : return 10;
+    }
 }
