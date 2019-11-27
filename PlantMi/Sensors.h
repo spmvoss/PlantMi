@@ -15,6 +15,8 @@ class Sensor{
       float _numOfDecoderSteps;
       int _pinNumber; // Which pin to measure
       int _readValue; // To store the reading
+      float _voltageSupplied; // Working voltage
+      float _voltageMeasured;
   public:
     Sensor();
     Sensor(int bits);
@@ -38,8 +40,6 @@ class Thermistor : public Sensor {
         float _T0; // Temperature (K) at which R0 is measured
         float _B; // Sensor's beta value
         float _R0; // Resistance at T0
-        float _voltageSupplied; // Working voltage
-        float _voltageMeasured;
         float _temperature;
     public:
         void configure(float T0, float B, float R0);
