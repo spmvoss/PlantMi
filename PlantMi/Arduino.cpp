@@ -20,3 +20,11 @@ int analogRead(int pin){
         default : return 10;
     }
 }
+
+bool digitalRead(int pin){
+    if(pin%2 == 0){
+        return true;
+    } else{
+        return false;
+    }
+}

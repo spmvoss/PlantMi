@@ -15,4 +15,6 @@ void pinMode(int pin, bool mode);
 // function to mimick the reading of an analog pin
 int analogRead(int pin);
 
+bool digitalRead(int pin);
+
 #endif
