@@ -58,4 +58,15 @@ class LightSensor : public Sensor {
     float measure();
 };
 
+class WaterLevelSensor : public Sensor {
+  private:
+    bool _waterLevelOK;
+    bool _reverseLogic;
+  public:
+    WaterLevelSensor();
+    WaterLevelSensor(int bits, bool _reverseLogic);
+    WaterLevelSensor(bool _reverseLogic);
+    bool measure();
+};
+
 #endif

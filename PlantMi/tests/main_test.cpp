@@ -11,6 +11,10 @@
 using namespace std; 
 
 int main(){
-    cout << digitalRead(2) << endl;
-    cout << digitalRead(3) << endl;
+    WaterLevelSensor waterSensorOne;
+    waterSensorOne.setPin(13);
+    cout << "Water Level one Ok: " << waterSensorOne.measure() << endl;
+    WaterLevelSensor waterSensorTwo(false);
+    waterSensorTwo.setPin(13);
+    cout << "Water Level one Ok: " << waterSensorTwo.measure() << endl;
 }
