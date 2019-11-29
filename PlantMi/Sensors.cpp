@@ -69,3 +69,19 @@ float LightSensor::measure(){
     _LUX = pow(_ldrR, _slope) + pow(10.0, _offset);
     return _LUX;
 }
+
+WaterLevelSensor::WaterLevelSensor() : Sensor(){
+    _reverseLogic = true;
+}
+
+WaterLevelSensor::WaterLevelSensor(bool reverseLogic) : Sensor(){
+    _reverseLogic = reverseLogic;
+}
+
+bool WaterLevelSensor::measure(){
+    _waterLevelOK = digitalRead(_pinNumber);
+    if(_reverseLogic){
+        _waterLevelOK = !_waterLevelOK;
+    }
+    return _waterLevelOK;
+}
