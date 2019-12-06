@@ -66,7 +66,7 @@ float LightSensor::measure(){
     _readValue = analogRead(_pinNumber);
     _voltageMeasured = _readValue * (_voltageSupplied/_numOfDecoderSteps);
     _ldrR = _dividerR * (_voltageSupplied/_voltageMeasured) - _dividerR;
-    _LUX = pow(_ldrR, _slope) + pow(10.0, _offset);
+    _LUX = pow(_ldrR, _slope) * pow(10.0, _offset);
     return _LUX;
 }
 
