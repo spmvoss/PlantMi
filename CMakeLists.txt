@@ -10,7 +10,7 @@ add_executable(plantmi ${SOURCES} PlantMi/main.cpp)
 
 
 file(GLOB TEST_SOURCES "PlantMi/tests/*.cpp")
-add_executable(runTests ${TEST_SOURCES})
+add_executable(runTests ${SOURCES} ${TEST_SOURCES})
 add_test(runTests runTests)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
