@@ -31,3 +31,6 @@
 *.out
 *.app
 PlantMi/.fuse*
+
+# exclude build folder
+/build*
