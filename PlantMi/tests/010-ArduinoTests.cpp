@@ -10,3 +10,9 @@ TEST_CASE("1: analogRead return value", "[analogRead()]"){
     REQUIRE(analogRead(15) == 10);
     REQUIRE(analogRead(1) == 10);
 }
+
+TEST_CASE("2: digitalRead return value", "[digitalRead()]"){
+    REQUIRE(digitalRead(2) == true);
+    REQUIRE(digitalRead(1) == false);
+    REQUIRE(digitalRead(0) == true);
+}
