@@ -10,7 +10,7 @@
 #include "Arduino.h"
 
 Sensor::Sensor(){
-    _numOfDecoderBits = 10;
+    _numOfDecoderBits = 12;
     _numOfDecoderSteps = pow(2,_numOfDecoderBits) - 1;
 }
 
@@ -24,6 +24,9 @@ void Sensor::setPin(int pin){
     pinMode(_pinNumber, INPUT);
 }
 
+SoilMoistureSensor::SoilMoistureSensor(int bits) : Sensor(bits){
+}
+
 void SoilMoistureSensor::configure(int lowValue, int highValue){
     // Set-Up the sensor before use
     _lowValue = lowValue; // analog read value in dry soil
@@ -35,6 +38,9 @@ int SoilMoistureSensor::measure(){
     _readValue = analogRead(_pinNumber); // Read the voltage at pin
     _soilMoistureLevel = (_readValue - _lowValue)*(100.0/(_highValue - _lowValue));
     return _soilMoistureLevel; // soil moisture level 0-100%
+}
+
+Thermistor::Thermistor(int bits): Sensor(bits){
 }
 
 void Thermistor::configure(float T0, float B, float R0){
@@ -53,6 +59,9 @@ float Thermistor::measure(){
     _temperature = 1/((1.0/_T0) + (1.0/_B)*log(_numOfDecoderSteps/_readValue));
     _temperature +- 273.1;
     return _temperature;
+}
+
+LightSensor::LightSensor(int bits) : Sensor(bits) {
 }
 
 void LightSensor::configure(float slope, float offset, float dividerR, float voltage){
