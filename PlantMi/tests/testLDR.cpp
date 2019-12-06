@@ -1,4 +1,4 @@
-#include "../Sensors.h"
+#include "Sensors.h"
 #include <iostream>
 
 using namespace std; 

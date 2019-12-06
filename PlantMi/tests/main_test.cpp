@@ -4,9 +4,9 @@
   Released into the public domain.
 */
 
-#include "../Sensors.h"
+#include "Sensors.h"
 #include <iostream>
-#include "../Arduino.h"
+#include "Arduino.h"
 
 using namespace std; 
 
