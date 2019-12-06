@@ -30,3 +30,7 @@ bool digitalRead(int pin){
         return false;
     }
 }
+
+void digitalWrite(int pin, bool mode){}
+
+void delay(int time){}

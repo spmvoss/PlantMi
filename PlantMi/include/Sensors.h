@@ -70,8 +70,8 @@ class WaterLevelSensor : public Sensor {
     bool _reverseLogic;
   public:
     WaterLevelSensor();
-    WaterLevelSensor(int bits, bool _reverseLogic);
-    WaterLevelSensor(bool _reverseLogic);
+    WaterLevelSensor(int bits, bool reverseLogic);
+    WaterLevelSensor(bool reverseLogic);
     bool measure();
 };
 

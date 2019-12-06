@@ -8,6 +8,8 @@
 
 #define INPUT true // Used in setting the pinmode to input
 #define OUTPUT true // Used in setting the pinmode to output
+#define HIGH true // Used in digitalwrite
+#define LOW true // Used in digialWrite
 
 // function to mimick the setting of the pinmode
 void pinMode(int pin, bool mode);
@@ -16,5 +18,9 @@ void pinMode(int pin, bool mode);
 int analogRead(int pin);
 
 bool digitalRead(int pin);
+
+void digitalWrite(int pin, bool mode);
+
+void delay(int time);
 
 #endif
