@@ -30,6 +30,7 @@ class SoilMoistureSensor : public Sensor {
     int _highValue; // Value at 100%
     int _soilMoistureLevel;
   public:
+    SoilMoistureSensor();
     SoilMoistureSensor(int bits);
     void configure(int lowValue, int highValue);
     int measure();
@@ -43,6 +44,7 @@ class Thermistor : public Sensor {
         float _R0; // Resistance at T0
         float _temperature;
     public:
+        Thermistor();
         Thermistor(int bits);
         void configure(float T0, float B, float R0);
         float measure();
@@ -56,6 +58,7 @@ class LightSensor : public Sensor {
     float _ldrR; // Resistance of the LDR
     float _dividerR;
   public:
+    LightSensor();
     LightSensor(int bits);
     void configure(float slope, float offset, float dividerR, float voltage);
     float measure();
