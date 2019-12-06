@@ -24,6 +24,9 @@ void Sensor::setPin(int pin){
     pinMode(_pinNumber, INPUT);
 }
 
+SoilMoistureSensor::SoilMoistureSensor() : Sensor(){
+}
+
 SoilMoistureSensor::SoilMoistureSensor(int bits) : Sensor(bits){
 }
 
@@ -36,9 +39,17 @@ void SoilMoistureSensor::configure(int lowValue, int highValue){
 int SoilMoistureSensor::measure(){
     // Performs a measurement and saves the value
     _readValue = analogRead(_pinNumber); // Read the voltage at pin
-    _soilMoistureLevel = (_readValue - _lowValue)*(100.0/(_highValue - _lowValue));
-    return _soilMoistureLevel; // soil moisture level 0-100%
+    if (_readValue <= _lowValue){
+        return 0;
+    } else if (_readValue >= _highValue){
+        return 100;
+    } else {
+        _soilMoistureLevel = (_readValue - _lowValue)*(100.0/(_highValue - _lowValue));
+        return _soilMoistureLevel; // soil moisture level 0-100%
+    }
 }
+
+Thermistor::Thermistor() : Sensor(){}
 
 Thermistor::Thermistor(int bits): Sensor(bits){
 }
@@ -60,6 +71,8 @@ float Thermistor::measure(){
     _temperature +- 273.1;
     return _temperature;
 }
+
+LightSensor::LightSensor() : Sensor() {}
 
 LightSensor::LightSensor(int bits) : Sensor(bits) {
 }

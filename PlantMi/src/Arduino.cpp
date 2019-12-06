@@ -17,6 +17,8 @@ int analogRead(int pin){
         case 12 : return 600;
         case 13 : return 900;
         case 14 : return 1010;
+        case 18 : return 2000;
+        case 19: return 3000;
         default : return 10;
     }
 }
