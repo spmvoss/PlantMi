@@ -68,7 +68,7 @@ float Thermistor::measure(){
     _readValue = analogRead(_pinNumber);
     // Only valid if the voltage divider R2=thermistor R0
     _temperature = 1/((1.0/_T0) + (1.0/_B)*log(_numOfDecoderSteps/_readValue));
-    _temperature +- 273.1;
+    _temperature -= 273.1;
     return _temperature;
 }
 
