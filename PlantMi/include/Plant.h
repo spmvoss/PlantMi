@@ -35,7 +35,7 @@ class Plant {
       bool _needsWatering;    
     public:
       Plant(string name);
-      string name();
+      const string &name;
       const bool &needsWatering;
       void changeName(string name);
       void addSoilMoistureSensor(int pin, int lowValue, int highValue, int threshold);

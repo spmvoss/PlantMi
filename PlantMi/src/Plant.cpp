@@ -14,19 +14,15 @@
 #include <string>
 using namespace std;
 
-Plant::Plant(string name) : needsWatering(_needsWatering){
+Plant::Plant(string plantName) : needsWatering(_needsWatering), name(_name){
     _soilMoistureContent = -1;
     _LUX = -1;
     _soilTemperature = -1.0;
-    _name = name;
+    _name = plantName;
     _hasSoilTemperatureSensor = false;
     _hasSoilMoistureSensor = false;
     _hasLightSensor = false;
     _hasPump = false;
-}
-
-string Plant::name(){
-    return _name;
 }
 
 void Plant::changeName(string name){
