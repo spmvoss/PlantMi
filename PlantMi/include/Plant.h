@@ -24,17 +24,21 @@ class Plant {
 
       int _soilMoistureContent;
       int _LUX;
+      int _soilMoistureThreshold;
+
       float _soilTemperature;
       
       bool _hasSoilMoistureSensor;
       bool _hasSoilTemperatureSensor;
       bool _hasLightSensor;
-      bool _hasPump;      
+      bool _hasPump;
+      bool _needsWatering;    
     public:
       Plant(string name);
-      void changeName(string name);
       string name();
-      void addSoilMoistureSensor(int pin, int lowValue, int highValue);
+      const bool &needsWatering;
+      void changeName(string name);
+      void addSoilMoistureSensor(int pin, int lowValue, int highValue, int threshold);
       void addSoilTemperatureSensor(int pin, float T0, float B, float R0);
       void addLightSensor(int pin, float slope, float offset, float dividerR, float voltage);
       void addPump(int pin, float litrePerHour, int sensorPin, bool sensorLogicReversed);
