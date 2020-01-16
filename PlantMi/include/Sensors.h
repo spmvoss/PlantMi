@@ -40,7 +40,7 @@ class Thermistor : public Sensor {
     private:
         int _resistor;
         float _T0; // Temperature (K) at which R0 is measured
-        float _B; // Sensor's beta value
+        float _Beta; // Sensor's beta value
         float _R0; // Resistance at T0
         float _temperature;
     public:
