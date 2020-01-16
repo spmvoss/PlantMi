@@ -54,20 +54,20 @@ Thermistor::Thermistor() : Sensor(){}
 Thermistor::Thermistor(int bits): Sensor(bits){
 }
 
-void Thermistor::configure(float T0, float B, float R0){
+void Thermistor::configure(float T0, float Beta, float R0){
     // TODO:
     // If the voltage divider R2 = R0, then the current formula in measure is valid
     // If so, there is no need to supply or set R0 
     // Maybe make it such that if R0 is supplied, use different formula 
     _T0 = T0;
-    _B = B;
+    _Beta = Beta;
     _R0 = R0;
 }
 
 float Thermistor::measure(){
     _readValue = analogRead(_pinNumber);
     // Only valid if the voltage divider R2=thermistor R0
-    _temperature = 1/((1.0/_T0) + (1.0/_B)*log(_numOfDecoderSteps/_readValue));
+    _temperature = 1/((1.0/_T0) + (1.0/_Beta)*log(_numOfDecoderSteps/_readValue));
     _temperature -= 273.1;
     return _temperature;
 }
