@@ -5,6 +5,7 @@
 */
 
 #include "Arduino.h"
+#include <iostream>
 
 void pinMode(int pin, bool mode){
     // Nothing to do here
@@ -34,3 +35,31 @@ bool digitalRead(int pin){
 void digitalWrite(int pin, bool mode){}
 
 void delay(int time){}
+
+SerialObj::SerialObj(){
+    // Nada
+}
+
+void SerialObj::println(std::string msg){
+    std::cout << msg << std::endl;
+}
+
+void SerialObj::println(int num){
+    std::cout << num << std::endl;
+}
+
+void SerialObj::println(double num){
+    std::cout << num << std::endl;
+}
+
+void SerialObj::print(std::string msg){
+    std::cout << msg;
+}
+
+void SerialObj::print(int num){
+    std::cout << num;
+}
+
+void SerialObj::print(double num){
+    std::cout << num;
+}
