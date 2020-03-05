@@ -7,15 +7,15 @@ TEST_CASE("1: Soil Moisture content tests","[soil_moisture]"){
     soilSensor.configure(1330, 2800);
 
     // Lower than min, should return 0
-    REQUIRE(soilSensor.measure() == 0);
+    REQUIRE(soilSensor.measure() == 100);
 
     SECTION("Value in range"){
         soilSensor.setPin(18);
-        REQUIRE(soilSensor.measure() == 45);
+        REQUIRE(soilSensor.measure() == 55);
     }
 
     SECTION("Value higher than range"){
         soilSensor.setPin(19);
-        REQUIRE(soilSensor.measure() == 100);
+        REQUIRE(soilSensor.measure() == 0);
     }
 }

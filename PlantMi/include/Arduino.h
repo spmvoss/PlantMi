@@ -36,6 +36,6 @@ class SerialObj{
       void print(double num);
 };
 
-SerialObj Serial;
+extern SerialObj Serial;
 
 #endif

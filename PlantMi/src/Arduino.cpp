@@ -7,6 +7,8 @@
 #include "Arduino.h"
 #include <iostream>
 
+SerialObj Serial;
+
 void pinMode(int pin, bool mode){
     // Nothing to do here
 }
