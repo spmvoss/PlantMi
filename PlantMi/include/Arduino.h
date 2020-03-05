@@ -6,6 +6,8 @@
 #ifndef Arduino_h
 #define Arduino_h
 
+#include<iostream>
+
 #define INPUT true // Used in setting the pinmode to input
 #define OUTPUT true // Used in setting the pinmode to output
 #define HIGH true // Used in digitalwrite
@@ -22,5 +24,18 @@ bool digitalRead(int pin);
 void digitalWrite(int pin, bool mode);
 
 void delay(int time);
+
+class SerialObj{
+    public:
+      SerialObj();
+      void println(std::string msg);
+      void println(int num);
+      void println(double num);
+      void print(std::string msg);
+      void print(int num);
+      void print(double num);
+};
+
+extern SerialObj Serial;
 
 #endif

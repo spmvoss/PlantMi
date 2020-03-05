@@ -25,7 +25,7 @@ void Sensor::setPin(int pin){
 }
 
 SoilMoistureSensor::SoilMoistureSensor() : Sensor(){
-}
+} 
 
 SoilMoistureSensor::SoilMoistureSensor(int bits) : Sensor(bits){
 }
@@ -40,11 +40,11 @@ int SoilMoistureSensor::measure(){
     // Performs a measurement and saves the value
     _readValue = analogRead(_pinNumber); // Read the voltage at pin
     if (_readValue <= _lowValue){
-        return 0;
-    } else if (_readValue >= _highValue){
         return 100;
+    } else if (_readValue >= _highValue){
+        return 0;
     } else {
-        _soilMoistureLevel = (_readValue - _lowValue)*(100.0/(_highValue - _lowValue));
+		_soilMoistureLevel = 100 - ((100*(_readValue-_lowValue))/(_highValue-_lowValue));
         return _soilMoistureLevel; // soil moisture level 0-100%
     }
 }
@@ -65,16 +65,35 @@ void Thermistor::configure(float T0, float Beta, float R0){
 }
 
 float Thermistor::measure(){
-    _readValue = analogRead(_pinNumber);
-    // Only valid if the voltage divider R2=thermistor R0
-    _temperature = 1/((1.0/_T0) + (1.0/_Beta)*log(_numOfDecoderSteps/_readValue));
+	int i;
+	_readValue = 0;
+	for(i=0;i<10;i++){
+		_readValue+=analogRead(_pinNumber);
+		delay(15);
+	}
+	_readValue /= 10;
+	float fraction = _readValue/_numOfDecoderSteps;
+	float resistance = (_R0/fraction) - _R0;
+	_temperature = 1/_T0 + 1/_Beta*log(resistance/_R0);
+	_temperature = 1/_temperature;
     _temperature -= 273.1;
     return _temperature;
 }
 
-LightSensor::LightSensor() : Sensor() {}
+LightSensor::LightSensor() : Sensor() {
+    _debug = false;
+}
 
 LightSensor::LightSensor(int bits) : Sensor(bits) {
+    _debug = false;
+}
+
+void LightSensor::enableDebug() {
+    _debug = true;
+}
+
+void LightSensor::disableDebug(){
+    _debug = false;
 }
 
 void LightSensor::configure(float slope, float offset, float dividerR, float voltage){
@@ -89,6 +108,12 @@ float LightSensor::measure(){
     _voltageMeasured = _readValue * (_voltageSupplied/_numOfDecoderSteps);
     _ldrR = _dividerR * (_voltageSupplied/_voltageMeasured) - _dividerR;
     _LUX = pow(_ldrR, _slope) * pow(10.0, _offset);
+	if(_debug){
+        Serial.println(_readValue);
+        Serial.println(_voltageMeasured);
+        Serial.println(_ldrR);
+        Serial.println(_LUX);
+    }
     return _LUX;
 }
 

@@ -57,11 +57,14 @@ class LightSensor : public Sensor {
     float _offset; // Offset of log10(lux)/log10(R)
     float _ldrR; // Resistance of the LDR
     float _dividerR;
+    bool _debug;
   public:
     LightSensor();
     LightSensor(int bits);
     void configure(float slope, float offset, float dividerR, float voltage);
     float measure();
+    void enableDebug();
+    void disableDebug();
 };
 
 class WaterLevelSensor : public Sensor {
