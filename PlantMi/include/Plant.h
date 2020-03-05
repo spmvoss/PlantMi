@@ -32,7 +32,8 @@ class Plant {
       bool _hasSoilTemperatureSensor;
       bool _hasLightSensor;
       bool _hasPump;
-      bool _needsWatering;    
+      bool _needsWatering;  
+      bool _hasNoSensors;  
     public:
       Plant(string name);
       const string &name;
@@ -43,6 +44,7 @@ class Plant {
       void addLightSensor(int pin, float slope, float offset, float dividerR, float voltage);
       void addPump(int pin, float litrePerHour, int sensorPin, bool sensorLogicReversed);
       void sample();
+      bool setMoistureLimit(int threshold);
 };
 
 #endif
