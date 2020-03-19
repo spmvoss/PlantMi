@@ -25,8 +25,6 @@ void digitalWrite(int pin, bool mode);
 
 void delay(int time);
 
-unsigned long millis();
-
 class SerialObj{
     public:
       SerialObj();
