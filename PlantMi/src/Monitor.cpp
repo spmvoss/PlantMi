@@ -8,11 +8,18 @@
 #include "Monitor.h"
 #include <Arduino.h>
 
-PlantMonitor::PlantMonitor(){
+
+PlantMonitor::PlantMonitor(const char* name) : _mqtt(name){
   _numPlants = 0;
   _maxPlants = 3;
   _interval = 2*1000;
   _lastMonitored = millis();
+  _mqttEnabled = false;
+}
+
+void PlantMonitor::enableMQTT(const char* ssid, const char* password, const char* host){
+  _mqtt.connect(ssid, password, host);
+  _mqttEnabled = true;
 }
 
 void PlantMonitor::setID(int id){
@@ -38,7 +45,24 @@ void PlantMonitor::run(){
     Serial.println("Time to monitor the plants!");
     if(_numPlants > 0){
       for(int i=0;i<_numPlants;i++){
-      plants[i].sample();
+        plants[i].sample();
+        if(_mqttEnabled){
+          if(plants[i].soilMoistureContent != -1){
+            const char val = plants[i].soilMoistureContent;
+            std::string url = "dev/PlantMonitor/" + plants[i].name + "soil_moisture"; 
+            _mqtt.publish(url.c_str(), &val);
+          }
+          if(plants[i].soilTemperature != -1.0){
+            const char val = plants[i].soilTemperature;
+            std::string url = "dev/PlantMonitor/" + plants[i].name + "soil_temperature"; 
+            _mqtt.publish(url.c_str(), &val);
+          }
+          if(plants[i].LUX != -1){
+            const char val = plants[i].LUX;
+            std::string url = "dev/PlantMonitor/" + plants[i].name + "luminance"; 
+            _mqtt.publish(url.c_str(), &val);
+          }
+        }
       }
     } else{
       Serial.println("You do not have any plants configured right now.");

@@ -9,22 +9,26 @@
 #define MONITOR_H
 
 #include "Plant.h"
+#include "MQTT.h"
 
 class PlantMonitor{
     private:
-        int _ID;
-        int _numPlants;
-        int _maxPlants;
-        int _interval;
-        unsigned long _lastMonitored;
-        unsigned long _currentTime;
+      int _ID;
+      int _numPlants;
+      int _maxPlants;
+      int _interval;
+      unsigned long _lastMonitored;
+      unsigned long _currentTime;
+      bool _mqttEnabled;
+      MQTT _mqtt;
     public:
-    PlantMonitor();
-    Plant plants[4] = {{"None"},{"None"},{"None"},{"None"}};
-    void setID(int id);
-    void createPlant(string name);
-    void setInterval(int seconds);
-    void run();
+      PlantMonitor(const char* name);
+      Plant plants[4] = {{"None"},{"None"},{"None"},{"None"}};
+      void setID(int id);
+      void createPlant(string name);
+      void setInterval(int seconds);
+      void run();
+      void enableMQTT(const char* ssid, const char* password, const char* host);
 };
 
 #endif
