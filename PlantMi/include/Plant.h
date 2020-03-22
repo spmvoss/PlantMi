@@ -37,7 +37,11 @@ class Plant {
     public:
       Plant(string name);
       const string &name;
+      const int &soilMoistureContent;
+      const int &LUX;
+      const float &soilTemperature;
       const bool &needsWatering;
+      bool waterLevelOk();
       void changeName(string name);
       void addSoilMoistureSensor(int pin, int lowValue, int highValue, int threshold);
       void addSoilTemperatureSensor(int pin, float T0, float B, float R0);

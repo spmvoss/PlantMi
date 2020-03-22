@@ -1,16 +1,27 @@
 #include <iostream>
-#include "Plant.h"
+#include "Monitor.h"
+#include <Arduino.h>
+#include "MQTT.h"
 
+PlantMonitor monitor("ESP32Raam");
+
+void loop();
 
 int main(){
-    Plant plant1("Dumbcane");
-    cout << "You created plant: " << plant1.name << endl;
-    plant1.sample();
-    plant1.addSoilMoistureSensor(18, 1330, 2800, 60);
-    plant1.addLightSensor(19, -1.42, 7.1, 10000.0, 3.3);
-    plant1.addSoilTemperatureSensor(18,298.0, 3950.0, 10000.0);
-    plant1.addPump(2,0.5,10,false);
-    plant1.changeName("Harry");
-    plant1.sample();
-    cout << "Plant need watering: " << plant1.needsWatering << endl;
+    monitor.setInterval(2);
+    monitor.createPlant("Harry");
+    monitor.plants[0].addSoilMoistureSensor(34, 1300, 3500, 110);
+    monitor.plants[0].addLightSensor(13, -1.40, 7.6, 10000.0, 3.3);
+    monitor.plants[0].addSoilTemperatureSensor(4, 301.0, 3950.0, 10000.0);
+    monitor.plants[0].addPump(14,80,5, true);
+    monitor.enableMQTT("Space Station", "Password", "192.168.8.45");   
+    
+    loop();
+}
+
+void loop(){
+    while(true){
+        monitor.run();
+        delay(10000);
+    }
 }

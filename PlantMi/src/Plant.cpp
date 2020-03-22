@@ -15,7 +15,7 @@
 #include <string>
 using namespace std;
 
-Plant::Plant(string plantName) : needsWatering(_needsWatering), name(_name){
+Plant::Plant(string plantName) : needsWatering(_needsWatering), name(_name), LUX(_LUX), soilMoistureContent(_soilMoistureContent), soilTemperature(_soilTemperature){
     _soilMoistureContent = -1;
     _LUX = -1;
     _soilTemperature = -1.0;
@@ -76,6 +76,7 @@ void Plant::sample(){
         Serial.println("Plant has no sensors, doing nothing");
         return;
     }
+    static int measurements[3];
     Serial.print("Taking measurement sample for: ");
     Serial.println(_name);
     if(_hasSoilMoistureSensor){
@@ -109,5 +110,11 @@ void Plant::sample(){
     } else if (_needsWatering && !_hasPump){
         // Do nothing (let the managing class check if _needsWatering and handle accordingly)
         // Or make this trigger some sort of notification system?
+    }
+}
+
+bool Plant::waterLevelOk(){
+    if(_hasPump){
+        return _pump.waterLevelOk();
     }
 }

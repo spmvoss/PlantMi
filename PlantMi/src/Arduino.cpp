@@ -6,11 +6,18 @@
 
 #include "Arduino.h"
 #include <iostream>
+#include <ctime>
+#include <unistd.h>
 
 SerialObj Serial;
 
 void pinMode(int pin, bool mode){
     // Nothing to do here
+}
+
+unsigned long millis(){
+    unsigned long ms = std::time(0);
+    return ms*1000;
 }
 
 int analogRead(int pin){
@@ -36,7 +43,9 @@ bool digitalRead(int pin){
 
 void digitalWrite(int pin, bool mode){}
 
-void delay(int time){}
+void delay(int time){
+    usleep(time);
+}
 
 SerialObj::SerialObj(){
     // Nada
